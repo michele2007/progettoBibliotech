@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+  web:
+    build: . #build i docker file che trova nella directory
+    container_name: webphp-BiblioTech
+    ports:
+      - "8090:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    networks:
+      - app-network
+
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: BiblioTech-Mailpit
+    restart: always
+    ports:
+      - "8025:8025"   
+      - "1025:1025"   
+    networks:
+      - app-network
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - SMTP_HOST=mailpit
+      - SMTP_PORT=1025
+
+
+
+  db:
+    image: mysql:8.0
+    container_name: mysqlDB
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: bibliotech
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/Bibliotech.sql:/docker-entrypoint-initdb.d/01-init.sql
+
+    networks:
+      - app-network
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+      UPLOAD_LIMIT: 300M
+    depends_on:
+      - db
+    networks:
+      - app-network
+      
+
+      
+
+      
+
+volumes:
+  db_data:
+
+
+networks:
+  app-network:
+    driver: bridge
