@@ -32,7 +32,8 @@ http://localhost:8090
 phpMyAdmin:
 http://localhost:8081
 
-
+Mailpit:
+http://localhost:8025
 
 ##Database
 Il database viene creato automaticamente all’avvio.
