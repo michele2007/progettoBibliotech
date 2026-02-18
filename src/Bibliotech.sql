@@ -24,7 +24,7 @@ CREATE TABLE libro (
     titolo VARCHAR(255) NOT NULL
 );
 
--- 🔥 TABELLA PRESTITO AGGIORNATA
+
 CREATE TABLE prestito (
     id_prestito INT AUTO_INCREMENT PRIMARY KEY,
 

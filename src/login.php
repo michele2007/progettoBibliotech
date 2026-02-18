@@ -4,6 +4,7 @@ require 'auth.php';
 require 'db.php';
 require 'mail.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $email = trim($_POST['email']);
