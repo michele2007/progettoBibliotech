@@ -6,7 +6,6 @@ USE bibliotech;
 CREATE TABLE utente (
     id_utente INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
-    passw VARCHAR(255) NOT NULL,
     passw_hash VARCHAR(255) NULL UNIQUE,
     nome VARCHAR(255) NOT NULL,
     cognome VARCHAR(255) NOT NULL,
@@ -57,11 +56,11 @@ CREATE TABLE sessione (
     FOREIGN KEY (id_utente) REFERENCES utente(id_utente) ON DELETE CASCADE
 );
 
-INSERT INTO utente (nome, cognome, email, passw, ruolo)
+INSERT INTO utente (nome, cognome, email, passw_hash, ruolo)
 VALUES
-('Mario', 'Rossi', 'mario.rossi@example.com', '123', 'studente'),
-('Franco', 'Bianchi', 'franco.bianchi@example.com', '123', 'studente'),
-('Angelo', 'Paciuli', 'angelo.paciuli@example.com', '123', 'bibliotecario');
+('Mario', 'Rossi', 'mario.rossi@example.com', '$2y$10$QG3Wdtts3kg1RTn3O6oXbetBnxnlhr5AvJ0BJxRvmUIILIREorPIa', 'studente'),
+('Franco', 'Bianchi', 'franco.bianchi@example.com', '$2y$10$QG3Wdtts3kg1RTn3O6oXbetBnxnlhr5AvJ0BJxRvmUIILIREorPIa', 'studente'),
+('Angelo', 'Paciuli', 'angelo.paciuli@example.com', '$2y$10$QG3Wdtts3kg1RTn3O6oXbetBnxnlhr5AvJ0BJxRvmUIILIREorPIa', 'bibliotecario');
 
 INSERT INTO libro (copie_totali, copie_disponibili, nome_autore, titolo)
 VALUES
